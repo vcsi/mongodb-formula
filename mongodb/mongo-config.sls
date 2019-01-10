@@ -12,7 +12,7 @@
 # Create mongodb folder if not exists
 {{ config.mongodb.process_pidfilepath }}:
   file.directory:
-    - owner: {{ config.package.mongo_user }}
+    - user: {{ config.package.mongo_user }}
     - group: {{ config.package.mongo_group }}
     - mode: 0775
 
@@ -31,7 +31,7 @@
 {{ config.mongodb.security_keyfile }}:
   file.managed:
     - contents_pillar: mongodb:lookup:mongodb:keyfile_contents
-    - owner: {{ config.package.mongo_user }}
+    - user: {{ config.package.mongo_user }}
     - group: {{ config.package.mongo_group }}
     - mode: 0600
     {% if config.mongodb.restart_service_after_state_change == 'true' %}
