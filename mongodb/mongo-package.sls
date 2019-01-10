@@ -6,7 +6,7 @@ package-install-mongodb:
     - pkgs:
       - mongodb-org
     - refresh: True
-{% if config.mongodb.use_repo == 'true' %}
+{% if config.package.use_repo == 'true' %}
     - require:
       - pkgrepo: mongodb_repo
 {% endif %}

@@ -23,7 +23,6 @@
       'local_net_bindip': '127.0.0.1',
       'net_port': '27017',
       'use_replica_set': 'false',
-      'use_repo': 'true',
       'security_keyfile': '/etc/mongodb_key',
       'replication_replsetname': 'rs0',
       'replication_oplogsizemb': '2048',
@@ -87,6 +86,7 @@
     {
       'mongo_user': 'mongod',
       'mongo_group': 'mongod',
+      'use_repo': 'true',
       'repo_version': '3.4',
       'repo_baseurl': 'https://repo.mongodb.org/yum/redhat/$releasever/mongodb-org/3.4/x86_64/',
       'repo_gpgkey': 'https://www.mongodb.org/static/pgp/server-3.4.asc',
@@ -99,6 +99,7 @@
     {
       'mongo_user': 'mongodb',
       'mongo_group': 'mongodb',
+      'use_repo': 'true',
       'repo_version': '3.4',
       'repo_baseurl': 'deb http://repo.mongodb.org/apt/debian stretch/mongodb-org/3.4 main',
       'repo_keyserver': 'keyserver.ubuntu.com',
