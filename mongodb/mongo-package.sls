@@ -11,6 +11,8 @@ package-install-mongodb:
       - pkgrepo: mongodb_repo
 {% endif %}
 
+{% if config.package.use_pip == 'true' %}
+
 # Install pip
 pip-install-mongodb:
   pkg.installed:
@@ -36,3 +38,5 @@ pip-package-install-pymongo:
     - require:
       - pkg: package-install-mongodb
       - cmd: pip-upgrade-mongodb
+
+{% endif %}
