@@ -1,5 +1,7 @@
 {% from "mongodb/map.jinja" import host_lookup as config with context -%}
 
+{% if config.mongodb.use_repo == 'true' %}
+
 # Configure repo file for RHEL based systems
 {% if salt.grains.get('os_family') == 'RedHat' %}
 mongodb_repo:
@@ -30,4 +32,6 @@ mongodb_repo:
         # MongoDB repository for {{ config.package.repo_version }} packages (Debian) 
     - keyserver: {{ config.package.repo_keyserver }}
     - keyid: {{ config.package.repo_key }}
+{% endif %}
+
 {% endif %}

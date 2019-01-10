@@ -6,8 +6,10 @@ package-install-mongodb:
     - pkgs:
       - mongodb-org
     - refresh: True
+{% if config.mongodb.use_repo == 'true' %}
     - require:
       - pkgrepo: mongodb_repo
+{% endif %}
 
 # Install pip
 pip-install-mongodb:
