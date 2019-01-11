@@ -39,4 +39,13 @@ pip-package-install-pymongo:
       - pkg: package-install-mongodb
       - cmd: pip-upgrade-mongodb
 
+{% else %}
+
+pip-package-install-pymongo:
+  pkg.installed:
+    - name: python-pymongo
+    - reload_modules: True
+    - require:
+      - pkg: package-install-mongodb
+
 {% endif %}

@@ -51,7 +51,11 @@ mongodb-create-{{ name }}-account:
       - dbOwner
   {% endif %}
     - require:
+{% if config.package.use_pip == 'true' %}
       - pip: pip-package-install-pymongo
+{% else %}
+      - pkg: pip-package-install-pymongo
+{% endif %}
       - service: service-mongod
     - unless: mongo -u {{ name }} -p {{ passwd }} --quiet --eval "db.getUser('{{ name }}')" {{ database }} |grep user
 
