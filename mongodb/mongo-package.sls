@@ -22,6 +22,15 @@ pip-install-mongodb:
     - require:
       - pkg: package-install-mongodb
 
+{% if config.package.use_proxy == 'true' %}
+
+pip-configure-https-proxy:
+  environ.setenv:
+    - name: https_proxy
+    - value: '{{ config.package.proxy_url }}'
+
+{% endif %}
+
 # Upgrade older versions of pip
 pip-upgrade-mongodb:
   cmd.run:
@@ -33,10 +42,19 @@ pip-upgrade-mongodb:
 # This is needed for mongodb_* states to work in the same Salt job
 pip-package-install-pymongo:
   pip.installed:
-    - name: pymongo
+    - name: {{ config.package.pymongo_pip_pkg }}
     - reload_modules: True
     - require:
       - pkg: package-install-mongodb
       - cmd: pip-upgrade-mongodb
+
+{% else %}
+
+pip-package-install-pymongo:
+  pkg.installed:
+    - name: python-pymongo
+    - reload_modules: True
+    - require:
+      - pkg: package-install-mongodb
 
 {% endif %}
