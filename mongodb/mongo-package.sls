@@ -22,6 +22,15 @@ pip-install-mongodb:
     - require:
       - pkg: package-install-mongodb
 
+{% if config.package.use_proxy == 'true' %}
+
+pip-configure-https-proxy:
+  environ.setenv:
+    - name: https_proxy
+    - value: '{{ config.package.proxy_url }}'
+
+{% endif %}
+
 # Upgrade older versions of pip
 pip-upgrade-mongodb:
   cmd.run:
